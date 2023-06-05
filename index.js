@@ -1,7 +1,10 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
+const path = require('path');
+
+let mainWindow;
 
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     alwaysOnTop: true,
@@ -9,7 +12,9 @@ function createWindow() {
     frame: false,
     acceptFirstMouse: false,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js'),
     }
   });
 
@@ -27,6 +32,13 @@ app.whenReady().then(() => {
 
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
+  
+  ipcMain.on('enableIgnoreMouseEvents', () => {
+    mainWindow.setIgnoreMouseEvents(true, { forward: true });
+  });
+  ipcMain.on('disableIgnoreMouseEvents', () => {
+    mainWindow.setIgnoreMouseEvents(false);
   });
 });
 

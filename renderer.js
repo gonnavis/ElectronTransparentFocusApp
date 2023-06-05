@@ -1,3 +1,5 @@
+// Access the `toggleIgnoreMouseEvents` function from the Electron API
+const { enableIgnoreMouseEvents, disableIgnoreMouseEvents } = window.electronAPI;
 
 const button = document.querySelector('button');
 const div = document.querySelector('div');
@@ -13,7 +15,9 @@ button.addEventListener('click', () => {
 })
 button.addEventListener('mouseenter', () => {
   div.textContent = 'Mouse entered';
+  disableIgnoreMouseEvents();
 })
 button.addEventListener('mouseleave', () => {
   div.textContent = 'Mouse left';
+  enableIgnoreMouseEvents();
 })
