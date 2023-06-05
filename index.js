@@ -5,10 +5,17 @@ function createWindow() {
     width: 800,
     height: 600,
     alwaysOnTop: true,
+    transparent: true,
+    frame: false,
+    acceptFirstMouse: false,
     webPreferences: {
       nodeIntegration: true
     }
   });
+
+  // mainWindow.setIgnoreMouseEvents(true); // Enable mouse events for the transparent areas
+  mainWindow.setIgnoreMouseEvents(true, { forward: true });
+  // mainWindow.setHasShadow(false); // Optional: Remove shadow to make the window blend in
 
   mainWindow.loadFile('index.html');
 
