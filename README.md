@@ -1,0 +1,6 @@
+# ElectronTransparentFocusApp
+
+Run:
+```
+electron .
+```
