@@ -1,7 +1,24 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, desktopCapturer } = require('electron');
 const path = require('path');
 
 let mainWindow;
+
+async function getCaptureWindowSources() {
+  let sources = await desktopCapturer.getSources({
+      types: ['window'],
+      thumbnailSize: {
+          width: 0,
+          height: 0,
+      },
+  });
+
+  sources = sources.map(source => {
+      const { id, name } = source;
+      return { id, name };
+  });
+  console.log('--- sources', sources);
+  return sources;
+};
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -40,6 +57,10 @@ app.whenReady().then(() => {
   ipcMain.on('disableIgnoreMouseEvents', () => {
     mainWindow.setIgnoreMouseEvents(false);
   });
+
+  setInterval(() => {
+    getCaptureWindowSources();
+  }, 1000);
 });
 
 app.on('window-all-closed', function () {
