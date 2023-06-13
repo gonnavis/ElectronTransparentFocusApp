@@ -25,11 +25,15 @@ button.addEventListener('mouseleave', () => {
 let buttonState = true;
 button.style.position = 'relative';
 button.addEventListener('click', () => {
-  if (buttonState) {
-    button.style.left = '100px';
-    buttonState = false;
-  } else {
-    button.style.left = '0px';
-    buttonState = true;
-  }
+  // if (buttonState) {
+  //   button.style.left = '100px';
+  //   buttonState = false;
+  // } else {
+  //   button.style.left = '0px';
+  //   buttonState = true;
+  // }
+
+  // button.style.display = 'none';
+
+  button.remove();
 })
