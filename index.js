@@ -58,9 +58,9 @@ app.whenReady().then(() => {
     mainWindow.setIgnoreMouseEvents(false);
   });
 
-  setInterval(() => {
-    getCaptureWindowSources();
-  }, 1000);
+  // setInterval(() => {
+  //   getCaptureWindowSources();
+  // }, 1000);
 });
 
 app.on('window-all-closed', function () {

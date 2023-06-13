@@ -21,3 +21,15 @@ button.addEventListener('mouseleave', () => {
   div.textContent = 'Mouse left';
   enableIgnoreMouseEvents();
 })
+
+let buttonState = true;
+button.style.position = 'relative';
+button.addEventListener('click', () => {
+  if (buttonState) {
+    button.style.left = '100px';
+    buttonState = false;
+  } else {
+    button.style.left = '0px';
+    buttonState = true;
+  }
+})
